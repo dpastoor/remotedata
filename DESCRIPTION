@@ -12,6 +12,7 @@ Depends:
 Imports:
     digest,
     dplyr (>= 0.4.2),
+    feather,
     lazyeval,
     stringr,
     magrittr,
