@@ -2,11 +2,15 @@
 % Please edit documentation in R/read-remote-xpt.R
 \name{read_remote_factory}
 \alias{read_remote_factory}
+\title{create remote reader functions}
 \usage{
 read_remote_factory(cb)
 }
 \arguments{
 \item{cb}{callback function that is applied to read the remote data}
+}
+\description{
+create remote reader functions
 }
 \examples{
 \dontrun{

@@ -1,3 +1,4 @@
+#' create remote reader functions
 #' @param cb callback function that is applied to read the remote data
 #' @examples \dontrun{
 #' read_remote_csv <- read_remote_factory(readr::read_csv)
@@ -67,12 +68,15 @@ read_remote_factory <- function(cb) {
 })
 }
 
+#' read remote files
 #' @param remote remote data file
 #' @param cache_dir local cache folder
 #' @param ... args to pass to read function
+#' @examples \dontrun{
+#' example_data <- read_remote_xpt("\\cdsnas\PHARMACOMETRICS\Fellows\Devin\example.xpt", ".cache")
+#' }
 #' @export
 read_remote_xpt <- read_remote_factory(SASxport::read.xport)
-
 
 #' @export
 #' @rdname read_remote_xpt

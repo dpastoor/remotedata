@@ -5,6 +5,7 @@
 \alias{read_remote_sas}
 \alias{read_remote_xlsx}
 \alias{read_remote_xpt}
+\title{read remote files}
 \usage{
 read_remote_xpt(remote, cache_dir, ...)
 
@@ -20,5 +21,13 @@ read_remote_sas(remote, cache_dir, ...)
 \item{cache_dir}{local cache folder}
 
 \item{...}{args to pass to read function}
+}
+\description{
+read remote files
+}
+\examples{
+\dontrun{
+example_data <- read_remote_xpt("\\\\cdsnas\\PHARMACOMETRICS\\Fellows\\Devin\\example.xpt", ".cache")
+}
 }
 
