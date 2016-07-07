@@ -1,8 +1,12 @@
-#' @param remote remote data file
-#' @param cache_dir local cache folder
-#' @param ... args to pass to read.xport
+#' @param cb callback function that is applied to read the remote data
+#' @examples \dontrun{
+#' read_remote_csv <- read_remote_factory(readr::read_csv)
+#' data <- read_remote_csv("<remote_dir/remote_file.csv>", "~/.cache")
+#' }
+#'
 #' @export
-read_remote_xpt <- function(remote, cache_dir, ...) {
+read_remote_factory <- function(cb) {
+  return(function(remote, cache_dir, ...) {
   prefix <- substr(digest::sha1(remote), 1, 15) # hopefully 15 should be unique enough
   # worried about making the file name too large and windows complaining about too long
   # of paths
@@ -17,7 +21,7 @@ read_remote_xpt <- function(remote, cache_dir, ...) {
   cache_record <- suppressWarnings(
     normalizePath(
       file.path(cache_dir, "cache_record.csv")
-      )
+    )
   )
 
   if (!file.exists(cache_file)) {
@@ -32,7 +36,7 @@ read_remote_xpt <- function(remote, cache_dir, ...) {
       #TODO: copy file to tempdir, maybe in separate process, then load locally from tempdir
     }
 
-    data <- SASxport::read.xport(remote, ...)
+    data <- cb(remote, ...)
     message("Data read in, creating cache at: ", cache_file)
     feather::write_feather(data, cache_file)
 
@@ -60,4 +64,24 @@ read_remote_xpt <- function(remote, cache_dir, ...) {
   }
 
   return(data)
+})
 }
+
+#' @param remote remote data file
+#' @param cache_dir local cache folder
+#' @param ... args to pass to read function
+#' @export
+read_remote_xpt <- read_remote_factory(SASxport::read.xport)
+
+
+#' @export
+#' @rdname read_remote_xpt
+read_remote_csv <- read_remote_factory(readr::read_csv)
+
+#' @export
+#' @rdname read_remote_xpt
+read_remote_xlsx <- read_remote_factory(readxl::read_excel)
+
+#' @export
+#' @rdname read_remote_xpt
+read_remote_sas <- read_remote_factory(haven::read_sas)

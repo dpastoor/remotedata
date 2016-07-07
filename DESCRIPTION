@@ -13,10 +13,13 @@ Imports:
     digest,
     dplyr (>= 0.4.2),
     feather,
+    haven,
     lazyeval,
-    stringr,
     magrittr,
-    SASxport
+    readr,
+    readxl,
+    SASxport,
+    stringr
 Suggests:
     knitr,
     rmarkdown,
