@@ -30,7 +30,15 @@ eg.
 read_remote_xpt
 ```
 
-However a factory function is also available for you to give any file reader function, as long as the first argument to the reader function is the file path.
+Each file is used by pointing to the remote file, as well as the cache *directory*
+
+```
+read_remote_xpt("remotefolder/remotefile.xpt", ".cache") #common practice to prepend a . to "system" folders not to be personally managed
+```
+
+## Creating Your Own Readers
+
+A factory function is also available for you to give any file reader function, as long as the first argument to the reader function is the file path.
 New remote readers can be created via:
 
 ```
@@ -43,7 +51,7 @@ read_remote_nonmem("<remotepath>/<remotefile>") #use
 The caching is done in a flat format to make it easy to see what files are avaiable and not worry about path issues. 
 It is common with STDM and ADAM datasets to have concises names within a heirarchical folder structure, 
 therefore a 20 character hash is derived from the absolute file path to create a unique prefix for each file. 
-For example, a given files at the locations "~/compoundX/PK.xpt" and "~/compoundY/PK.xpt" the cache dir might look something like
+For example, a given files at the locations "~/compoundX/PK.xpt" and "~/compoundY/PK.xpt" the cache directory might contain files like
 "b98ef5d1f7df9fb_PK.feather" and "cbc07d0bb84ec43_PK.feather".
 
 To track the names of the files, in case you want to delete a specific file from the cache as well as to provide a 
