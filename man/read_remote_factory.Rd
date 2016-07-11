@@ -4,10 +4,14 @@
 \alias{read_remote_factory}
 \title{create remote reader functions}
 \usage{
-read_remote_factory(cb)
+read_remote_factory(cb, cache_method = "rds", compression = FALSE)
 }
 \arguments{
 \item{cb}{callback function that is applied to read the remote data}
+
+\item{cache_method}{caching method, either rds or feather}
+
+\item{compression}{whether to compress files if saving as rds, default to false}
 }
 \description{
 create remote reader functions

@@ -2,8 +2,12 @@
 
 export(clean_cache_records)
 export(read_remote_csv)
+export(read_remote_csvc)
 export(read_remote_factory)
 export(read_remote_sas)
+export(read_remote_sasc)
 export(read_remote_xlsx)
+export(read_remote_xlsxc)
 export(read_remote_xpt)
+export(read_remote_xptc)
 importFrom(magrittr,"%>%")
